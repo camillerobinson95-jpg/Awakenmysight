@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cami Elle — Awaken My Sight</title>
+  <link rel="stylesheet" href="styles.css" />
+  <meta name="description" content="Cami Elle — Advertising and Marketing Communications Graduate. Content Creator." />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <!-- Replace assets/profile.jpg with your real profile image -->
+      <img id="profile-image" src="assets/profile.jpg" alt="Cami Elle" />
+      <h1 id="display-name">cami.elle</h1>
+      <p id="bio">Advertising and Marketing Communications Graduate. Content Creator.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="links" id="links">
+      <!-- Links are loaded from links.json. Edit links.json to update. -->
+    </section>
+
+    <section class="gallery" id="instagram-embed">
+      <h2>Instagram</h2>
+      <div class="insta-wrapper">
+        <p class="muted">Instagram feed will be embedded here once you provide your public username or post URLs. See README.md for instructions.</p>
+      </div>
+    </section>
+
+    <section class="resume">
+      <h2>Resume</h2>
+      <p><a href="assets/resume.pdf" target="_blank" rel="noopener">Download my resume (PDF)</a></p>
+    </section>
+
+    <section class="contact">
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:youremail@example.com">youremail@example.com</a></p>
+      <p>LinkedIn: <a href="https://www.linkedin.com/in/camille-e-robinson-717a85211" target="_blank" rel="noopener">Camille E. Robinson</a></p>
+    </section>
+
+    <section class="resources">
+      <h2>Resources</h2>
+      <p>Helpful organization: <a href="https://polarisproject.org/" target="_blank" rel="noopener">Polaris</a> — resources and hotline for human trafficking support (U.S.).</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="year"></span> cami.elle — Awaken My Sight</p>
+    <div class="social">
+      <a href="https://linktr.ee/cami.elle" target="_blank" rel="noopener">Linktree</a>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    async function loadLinks(){
+      try {
+        const res = await fetch('links.json');
+        if(!res.ok) return;
+        const links = await res.json();
+        const container = document.getElementById('links');
+        container.innerHTML = '';
+        links.forEach(l => {
+          const a = document.createElement('a');
+          a.className = 'link-btn';
+          a.href = l.url;
+          a.target = '_blank';
+          a.rel = 'noopener';
+          a.textContent = l.title;
+          container.appendChild(a);
+        });
+      } catch(e) {
+        console.warn('links.json not found or failed to load', e);
+      }
+    }
+    loadLinks();
+  </script>
+</body>
+</html>
